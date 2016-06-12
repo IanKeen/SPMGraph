@@ -126,7 +126,7 @@ func process(url: String, parent: Dependency? = nil) -> [Dependency] {
 }
 
 do {
-    let input = NSProcessInfo.processInfo().arguments.first!
+    let input = NSProcessInfo.processInfo().arguments[1]
     
     let graph = process(url: input)
     

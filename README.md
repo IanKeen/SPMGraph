@@ -5,5 +5,5 @@ Just something I whipped up quickly to help diagnose problems, it's far from pre
 
 ### Example:
 ```
-./SPMGraph https://github.com/IanKeen/Chameleon
+SPMGraph https://github.com/IanKeen/Chameleon
 ```

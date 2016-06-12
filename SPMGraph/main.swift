@@ -126,8 +126,9 @@ func process(url: String, parent: Dependency? = nil) -> [Dependency] {
 }
 
 do {
-    let input = NSProcessInfo.processInfo().arguments.first!
+    let input = NSProcessInfo.processInfo().arguments[1]
     
+    print("PROCESSING: \(input)")
     let graph = process(url: input)
     
     var grouped = [String: [Dependency]]()
@@ -138,11 +139,12 @@ do {
     }
     
     for (url, deps) in grouped {
-        print("\nURL: \(url)")
+        print("\nDEPENDENCY: \(url)")
         let versions = deps
-            .map {
-                let chain = $0.chain().dropFirst().map({ $0.url }).joined(separator: " > ")
-                return "\($0.version) from \(chain)"
+            .flatMap {
+                let chain = $0.chain().dropFirst()
+                guard !chain.isEmpty else { return nil }
+                return "\($0.version) from \(chain.map({ $0.url }).joined(separator: " > "))"
             }
             .joined(separator: "\n")
         
